@@ -1,0 +1,19 @@
+name = "pridle"
+type = "javascript"
+
+zone_id = ""
+account_id = ""
+workers_dev = true
+route = "pridle.nozomoto.me/*"
+
+[site]
+bucket = "./public"
+entry-point = "."
+
+[build]
+command = "npm run build:worker"
+watch_dir = "build/index.js"
+
+[build.upload]
+format="service-worker"
+

@@ -1,0 +1,10 @@
+.cache
+.git
+.mf
+/build
+/dist
+/node_modules
+/posts
+/public
+app/posts.json
+app/tailwind.css

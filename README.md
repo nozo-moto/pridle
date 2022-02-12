@@ -1,34 +1,34 @@
-# Welcome to Remix!
+# PRIDLE
+This game was inspired by Wordle.
 
-- [Remix Docs](https://remix.run/docs)
+## Link
 
-## Development
+Your can play this game from this link
+[pridle.nozomoto.me](https://pridle.nozomoto.me/)
 
-You will be running two processes during development:
+## Tech stack
 
-- The Miniflare server (miniflare is a local environment for Cloudflare Workers)
-- The Remix development server
+this repository using
+- [cloudflare workers](https://workers.cloudflare.com/)
+- [remix](https://remix.run/)
+- [tailwind](https://tailwindcss.com/)
 
-```sh
-# in one tab, start the remix dev server
-$ npm run dev
+## About 
 
-# in another, start the miniflare server
-$ npm start
-```
+Guess the 6 digits prime number in six tries.
 
-Open up [http://127.0.0.1:8787](http://127.0.0.1:8787) and you should be ready to go!
+Each guess must be a valid 6 digits number. Hit the enter button to submit.
 
-If you'd rather run everything in a single tab, you can look at [concurrently](https://npm.im/concurrently) or similar tools to run both processes in one tab.
+After each guess, the color of the tiles will change to show how close your guess was to the number.
 
-## Deployment
+A new prime number will be available each day!
 
-Use [wrangler](https://developers.cloudflare.com/workers/cli-wrangler) to build and deploy your application to Cloudflare Workers. If you don't have it yet, follow [the installation guide](https://developers.cloudflare.com/workers/cli-wrangler/install-update) to get it setup. Be sure to [authenticate the CLI](https://developers.cloudflare.com/workers/cli-wrangler/authentication) as well.
+## Screen shot
 
-If you don't already have an account, then [create a cloudflare account here](https://dash.cloudflare.com/sign-up) and after verifying your email address with Cloudflare, go to your dashboard and set up your free custom Cloudflare Workers subdomain.
+![image](./docs/screenshot.png)
 
-Once that's done, you should be able to deploy your app:
+## Author
+Nozomi Morimoto 
+[site](https://blog.nozomoto.me)
 
-```sh
-npm run deploy
-```
+[twitter](https://twitter.com/nz66zn)
