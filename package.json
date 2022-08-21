@@ -19,26 +19,27 @@
     "deploy": "npm run build && wrangler publish"
   },
   "dependencies": {
-    "@remix-run/cloudflare-workers": "^1.1.3",
-    "@remix-run/react": "^1.1.3",
+    "@remix-run/cloudflare-workers": "^1.6.8",
+    "@remix-run/react": "^1.6.8",
     "classnames": "^2.3.1",
-    "prettier": "^2.5.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-icons": "^4.3.1",
-    "react-router-dom": "^6.2.1",
-    "remix": "^1.1.3"
+    "prettier": "^2.7.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.4.0",
+    "react-router-dom": "^6.3.0",
+    "remix": "^1.6.8",
+    "ts-node": "^10.9.1"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^2.2.2",
-    "@remix-run/dev": "^1.1.3",
-    "@types/react": "^17.0.24",
-    "@types/react-dom": "^17.0.9",
-    "concurrently": "^7.0.0",
-    "esbuild": "0.13.14",
-    "miniflare": "2.0.0-next.3",
-    "tailwindcss": "^3.0.18",
-    "typescript": "^4.1.2"
+    "@cloudflare/workers-types": "^3.14.1",
+    "@remix-run/dev": "^1.6.8",
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
+    "concurrently": "^7.3.0",
+    "esbuild": "0.15.5",
+    "miniflare": "2.7.0",
+    "tailwindcss": "^3.1.8",
+    "typescript": "^4.7.4"
   },
   "engines": {
     "node": ">=14"
