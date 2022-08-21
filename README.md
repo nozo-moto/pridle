@@ -13,11 +13,11 @@ this repository using
 - [remix](https://remix.run/)
 - [tailwind](https://tailwindcss.com/)
 
-## About 
+## About
 
-Guess the 6 digits prime number in six tries.
+Guess the 5 digits prime number in six tries.
 
-Each guess must be a valid 6 digits number. Hit the enter button to submit.
+Each guess must be a valid 5 digits number. Hit the enter button to submit.
 
 After each guess, the color of the tiles will change to show how close your guess was to the number.
 
@@ -28,7 +28,7 @@ A new prime number will be available each day!
 ![image](./docs/screenshot.png)
 
 ## Author
-Nozomi Morimoto 
+Nozomi Morimoto
 [site](https://blog.nozomoto.me)
 
 [twitter](https://twitter.com/nz66zn)

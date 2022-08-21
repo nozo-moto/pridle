@@ -12,9 +12,9 @@ export default function QuestionModal(props: QuesitonModalProps) {
         <p>This game was inspired by Wordle.</p>
       </div>
       <div className="flex w-full flex-col border-b">
-        <p>Guess the 6 digits prime number in six tries.</p>
+        <p>Guess the 5 digits prime number in six tries.</p>
         <p>
-          Each guess must be a valid 6 digits number. Hit the enter button to
+          Each guess must be a valid 5 digits number. Hit the enter button to
           submit.
         </p>
         <p>
