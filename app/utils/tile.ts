@@ -72,3 +72,20 @@ export function GetFontTileColor(state: TileState): string {
   }
   return "text-black";
 }
+
+export function GetTileEmoji(state: TileState): string {
+  switch (state) {
+    case TileState.Inputed:
+    case TileState.NotInput:
+    case TileState.NotExists: {
+      return "⬛";
+    }
+    case TileState.Exists: {
+      return "🟨";
+    }
+    case TileState.JustMatch: {
+      return "🟩";
+    }
+  }
+  return "⬛";
+}

@@ -34,7 +34,7 @@ export function UpdateKeyColor(
         tmpKey.state = KeyState.NotExists;
       }
     }
-    keys[parseInt(tile.value)] = tmpKey
+    keys[parseInt(tile.value)] = tmpKey;
   });
   return keys;
 }

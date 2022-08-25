@@ -5,6 +5,7 @@ import { SetStateAction, Dispatch } from "react";
 import { useState, useEffect, useRef } from "react";
 import Board from "~/components/board";
 import KeyBoard from "~/components/keyboard";
+import ResultModal from "./result_modal";
 
 const RESULT = getTodayPrimeNumber();
 const DELETE_KEY = "Delete";
@@ -85,7 +86,8 @@ function useEnterKey(
   colIndex: number,
   setColIndex: Dispatch<SetStateAction<number>>,
   numKeyboard: Key[],
-  setNumKeyboard: Dispatch<SetStateAction<Key[]>>
+  setNumKeyboard: Dispatch<SetStateAction<Key[]>>,
+  setResultModal: Dispatch<SetStateAction<boolean>>
 ): Key {
   const [enterKeyInput, setEnterKeyInput] = useState<string>("");
   useEffect(() => {
@@ -103,7 +105,7 @@ function useEnterKey(
       );
       tmpTileMatrix = UpdateTileMatrixColor(tmpTileMatrix, RESULT);
       if (RESULT == inputNum) {
-        alert("CORRECT");
+        setResultModal(true);
       }
       tileMatrix[rowIndex] = tmpTileMatrix;
       setTileMatrix(tileMatrix);
@@ -160,6 +162,8 @@ export function useGameProps(): GameProps {
   const keyboardUpdate = useRef<() => void>(null!);
   const boardUpdate = useRef(null);
 
+  const [resultModalFlag, setResultModal] = useState<boolean>(false);
+
   return {
     numKeys: useNumKeys(
       tileMatrix,
@@ -189,9 +193,12 @@ export function useGameProps(): GameProps {
       colIndex,
       setColIndex,
       numKeyboard,
-      setNumKeyboard
+      setNumKeyboard,
+      setResultModal
     ),
     tileMatrix: tileMatrix,
+    resultModalflag: resultModalFlag,
+    setResultModal: setResultModal,
   };
 }
 
@@ -200,6 +207,8 @@ type GameProps = {
   deleteKey: Key;
   enterKey: Key;
   tileMatrix: Tile[][];
+  resultModalflag: boolean;
+  setResultModal: Dispatch<SetStateAction<boolean>>;
 };
 
 export default function Game(props: GameProps) {
@@ -210,6 +219,12 @@ export default function Game(props: GameProps) {
         numKeys={props.numKeys}
         deleteKey={props.deleteKey}
         enterKey={props.enterKey}
+      />
+      <ResultModal
+        flag={props.resultModalflag}
+        setFlag={props.setResultModal}
+        won={false}
+        tileMatrix={props.tileMatrix}
       />
     </div>
   );
