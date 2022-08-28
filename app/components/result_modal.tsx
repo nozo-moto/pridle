@@ -6,6 +6,7 @@ type ResultModalProps = {
   flag: boolean;
   setFlag: Dispatch<SetStateAction<boolean>>;
   won: boolean;
+  setWon: Dispatch<SetStateAction<boolean>>;
   tileMatrix: Tile[][];
 };
 
@@ -15,19 +16,24 @@ export default function ResultModal(props: ResultModalProps) {
   }
   return (
     <Modal {...useModalProps(props.flag, props.setFlag, "RESULT")}>
-      <p>{props.won ? "SUCCESS" : "FAILED"}</p>
-      <TwitterLinkTweet
-        text={generateTweetText(props.won, props.tileMatrix)}
-        url="https://pridle.nozomoto.me"
-      >
-        share result
-      </TwitterLinkTweet>
+      <div className="text-lg">{props.won ? "SUCCESS" : "FAILED"}</div>
+      <div>
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          <TwitterLinkTweet
+            text={generateTweetText(props.won, props.tileMatrix)}
+            url="https://pridle.nozomoto.me"
+            hashtags={["pridle"]}
+          >
+            share result
+          </TwitterLinkTweet>
+        </button>
+      </div>
     </Modal>
   );
 }
 
 const generateTweetText = (result: boolean, tileMatrix: Tile[][]): string => {
-  let text = "PRIDLE 5x5\n";
+  let text = "PRIDLE\n";
   tileMatrix.forEach((tileArray) => {
     tileArray.forEach((tile) => {
       text += GetTileEmoji(tile.state);
@@ -41,16 +47,18 @@ type TwitterLinkTweetProps = {
   text?: string;
   url?: string;
   related?: string[];
-  in_reply_to?: string;
+  hashtags?: string[];
 } & Omit<ComponentProps<"a">, "href" | "target" | "rel">;
 
 export const TwitterLinkTweet = forwardRef<
   HTMLAnchorElement,
   TwitterLinkTweetProps
->(({ text, url, related, in_reply_to, ...intrinsicProps }, forwardedRef) => {
+>(({ text, url, related, hashtags, ...intrinsicProps }, forwardedRef) => {
   const _url = new URL("https://twitter.com/intent/tweet");
   if (text !== undefined) _url.searchParams.set("text", text);
   if (url !== undefined) _url.searchParams.set("url", url);
+  if (hashtags !== undefined)
+    _url.searchParams.set("hashtags", hashtags.join(","));
   return (
     <a
       ref={forwardedRef}

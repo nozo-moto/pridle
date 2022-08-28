@@ -4,7 +4,7 @@
   "description": "",
   "license": "",
   "scripts": {
-    "postinstall": "remix setup cloudflare-workers",
+    "postinstall": "remix setup cloudflare",
     "build:remix": "remix build",
     "build:worker": "esbuild --define:process.env.NODE_ENV='\"production\"' --minify --bundle --sourcemap --outdir=dist ./worker",
     "dev:worker": "esbuild --define:process.env.NODE_ENV='\"development\"' --bundle --sourcemap --outdir=dist ./worker",
@@ -33,6 +33,7 @@
   "devDependencies": {
     "@cloudflare/workers-types": "^3.14.1",
     "@remix-run/dev": "^1.6.8",
+    "@remix-run/server-runtime": "^1.7.0",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "concurrently": "^7.3.0",

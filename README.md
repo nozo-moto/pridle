@@ -1,4 +1,5 @@
 # PRIDLE
+
 This game was inspired by Wordle.
 
 ## Link
@@ -9,6 +10,7 @@ Your can play this game from this link
 ## Tech stack
 
 this repository using
+
 - [cloudflare workers](https://workers.cloudflare.com/)
 - [remix](https://remix.run/)
 - [tailwind](https://tailwindcss.com/)
@@ -28,6 +30,7 @@ A new prime number will be available each day!
 ![image](./docs/screenshot.png)
 
 ## Author
+
 Nozomi Morimoto
 [site](https://blog.nozomoto.me)
 
