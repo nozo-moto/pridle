@@ -5,15 +5,15 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  MetaFunction,
+  LinksFunction,
 } from "remix";
-import type { MetaFunction, LinksFunction } from "remix";
 import styles from "./tailwind.css";
 
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import * as gtag from "~/utils/gtags";
 import Header from "~/components/header";
-
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: styles }];
 };

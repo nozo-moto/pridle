@@ -5,6 +5,7 @@ import { SetStateAction, Dispatch } from "react";
 import { useState, useEffect, useRef } from "react";
 import Board from "~/components/board";
 import KeyBoard from "~/components/keyboard";
+import ResultModal from "./result_modal";
 
 const RESULT = getTodayPrimeNumber();
 const DELETE_KEY = "Delete";
@@ -23,11 +24,12 @@ function useNumKeys(
   numKeyInput: string,
   setNumKeyInput: Dispatch<SetStateAction<string>>,
   numKeyboard: Key[],
-  setNumKeyboard: Dispatch<SetStateAction<Key[]>>
+  setNumKeyboard: Dispatch<SetStateAction<Key[]>>,
+  won: boolean
 ): Key[] {
   useEffect(() => {
     let tmpTileMatrix = tileMatrix[rowIndex];
-    if (numKeyInput == "") {
+    if (numKeyInput == "" || rowIndex === MAXROW || won) {
       return;
     }
     if (colIndex < MAXCOL) {
@@ -85,14 +87,18 @@ function useEnterKey(
   colIndex: number,
   setColIndex: Dispatch<SetStateAction<number>>,
   numKeyboard: Key[],
-  setNumKeyboard: Dispatch<SetStateAction<Key[]>>
+  setNumKeyboard: Dispatch<SetStateAction<Key[]>>,
+  setResultModal: Dispatch<SetStateAction<boolean>>,
+  setWon: Dispatch<SetStateAction<boolean>>
 ): Key {
   const [enterKeyInput, setEnterKeyInput] = useState<string>("");
   useEffect(() => {
-    if (enterKeyInput == "") {
+    if (enterKeyInput == "" || rowIndex === MAXROW) {
       return;
     }
     let tmpTileMatrix = tileMatrix[rowIndex];
+
+    // confirm all columns have input
     if (colIndex == MAXCOL) {
       const inputNum = parseInt(
         tmpTileMatrix
@@ -102,9 +108,7 @@ function useEnterKey(
           .join("")
       );
       tmpTileMatrix = UpdateTileMatrixColor(tmpTileMatrix, RESULT);
-      if (RESULT == inputNum) {
-        alert("CORRECT");
-      }
+
       tileMatrix[rowIndex] = tmpTileMatrix;
       setTileMatrix(tileMatrix);
       setColIndex(0);
@@ -113,6 +117,15 @@ function useEnterKey(
       // update keyboard
       const tmpNumKeyboard = UpdateKeyColor(numKeyboard, RESULT, tmpTileMatrix);
       setNumKeyboard(tmpNumKeyboard);
+
+      // show result
+      if (RESULT === inputNum) {
+        setWon(true);
+        setResultModal(true);
+      } else if (rowIndex === MAXROW - 1) {
+        setWon(false);
+        setResultModal(true);
+      }
     }
     setEnterKeyInput("");
   }, [enterKeyInput]);
@@ -157,8 +170,9 @@ export function useGameProps(): GameProps {
 
   const [rowIndex, setRowIndex] = useState<number>(0);
   const [colIndex, setColIndex] = useState<number>(0);
-  const keyboardUpdate = useRef<() => void>(null!);
-  const boardUpdate = useRef(null);
+
+  const [resultModalFlag, setResultModal] = useState<boolean>(false);
+  const [won, setWon] = useState<boolean>(false);
 
   return {
     numKeys: useNumKeys(
@@ -171,7 +185,8 @@ export function useGameProps(): GameProps {
       numKeyInput,
       setNumKeyInput,
       numKeyboard,
-      setNumKeyboard
+      setNumKeyboard,
+      won
     ),
     deleteKey: useDeleteKey(
       tileMatrix,
@@ -189,9 +204,15 @@ export function useGameProps(): GameProps {
       colIndex,
       setColIndex,
       numKeyboard,
-      setNumKeyboard
+      setNumKeyboard,
+      setResultModal,
+      setWon
     ),
     tileMatrix: tileMatrix,
+    resultModalflag: resultModalFlag,
+    setResultModal: setResultModal,
+    won: won,
+    setWon: setWon,
   };
 }
 
@@ -200,6 +221,10 @@ type GameProps = {
   deleteKey: Key;
   enterKey: Key;
   tileMatrix: Tile[][];
+  resultModalflag: boolean;
+  setResultModal: Dispatch<SetStateAction<boolean>>;
+  won: boolean;
+  setWon: Dispatch<SetStateAction<boolean>>;
 };
 
 export default function Game(props: GameProps) {
@@ -210,6 +235,13 @@ export default function Game(props: GameProps) {
         numKeys={props.numKeys}
         deleteKey={props.deleteKey}
         enterKey={props.enterKey}
+      />
+      <ResultModal
+        flag={props.resultModalflag}
+        setFlag={props.setResultModal}
+        won={props.won}
+        setWon={props.setWon}
+        tileMatrix={props.tileMatrix}
       />
     </div>
   );

@@ -1,4 +1,3 @@
-import { Link } from "remix";
 import { IconContext } from "react-icons";
 import { BsQuestionCircle } from "react-icons/bs";
 import { MdSettings } from "react-icons/md";
